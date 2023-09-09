@@ -15,8 +15,6 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
-      - name: Get package version
-        id: package-version
         env:
           VERSION: ${{ steps.package-version.outputs.version }}
 
