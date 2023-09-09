@@ -15,7 +15,6 @@ jobs:
       - name: get-npm-version
         id: get-npm-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
-      - name: Set package version as env variable
         run: echo "VERSION=${{ steps.get-npm-version.outputs.version }}" >> $GITHUB_ENV
 
   build-and-publish:
