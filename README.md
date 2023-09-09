@@ -37,7 +37,7 @@ Here's an example of how you can use Macrolock:
 }
 ```
 
-In this example, we're using [chokidar](https://www.npmjs.com/package/chokidar) to watch for changes in our directories. When chokidar detects a change, it runs our ifDif` scripts which use Macrolock to check if there have been any substantial changes in our directories (i.e., changes that affect the checksum). If there have been, Macrolock executes the provided scripts (`js:build`and`generate-components`).
+In this example, we're using [chokidar](https://www.npmjs.com/package/chokidar) to watch for changes in our directories. When chokidar detects a change, it runs our `ifDif` scripts which use Macrolock to check if there have been any substantial changes in our directories (i.e., changes that affect the checksum). If there have been, Macrolock executes the provided scripts (`js:build`and`generate-components`).
 
 ## Contributing
 
