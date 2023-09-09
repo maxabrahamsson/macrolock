@@ -76,7 +76,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/${{ env.APP_NAME }}-${{ steps.version.outputs.current-version }}.tgz
-          asset_name: ${{ env.APP_NAME }}-${{ steps.version.outputs.current-version }}.tgz
-          asset_content_type: application/x-gzip
+          tag_name: ${{ env.APP_NAME }}-${{ steps.npm-version.outputs.current-version }}.${{ github.run_number }}
+          release_name: ${{ env.APP_NAME }} ${{ steps.npm-version.outputs.current-version }}
+          draft: false
+          prerelease: false
