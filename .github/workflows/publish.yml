@@ -12,12 +12,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: martinbeentjes/npm-get-version-action@v1.3.1
         id: get-npm-version
-      - run: "echo NPM Version: ${{ steps.npm-version.outputs.current-version }}"
 
   build-and-publish:
     needs: get-version
     runs-on: ubuntu-latest
     steps:
+      - run: "echo NPM Version: ${{ steps.npm-version.outputs.current-version }}"
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
