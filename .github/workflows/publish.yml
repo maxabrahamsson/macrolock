@@ -6,10 +6,20 @@ on:
       - release
 
 jobs:
-  get-version:
+  build:
     runs-on: ubuntu-latest
+
+    env:
+      APP_NAME: ${{ github.event.repository.name }}
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Git checkout
+        uses: actions/checkout@v3
+
+      - name: Get commit
+        id: git
+        run: |
+          echo "::set-output name=short_sha::$(git rev-parse --short HEAD)"
 
       - name: Get latest version
         id: version
@@ -20,9 +30,3 @@ jobs:
           echo Branch name is: ${{ github.ref_name }}
           echo Short sha: ${{ steps.git.outputs.short_sha}}
           echo Version is: ${{ steps.version.outputs.current-version}}
-
-  build-and-publish:
-    needs: get-version
-    runs-on: ubuntu-latest
-    steps:
-      - run: "echo NPM Version: ${{ steps.npm-version.outputs.current-version }}"
