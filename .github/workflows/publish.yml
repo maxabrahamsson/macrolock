@@ -10,9 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: get-npm-version
+      - uses: martinbeentjes/npm-get-version-action@v1.3.1
         id: get-npm-version
-        uses: martinbeentjes/npm-get-version-action@v1.3.1
       - run: "echo NPM Version: ${{ steps.npm-version.outputs.current-version }}"
 
   build-and-publish:
