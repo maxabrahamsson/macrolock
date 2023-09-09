@@ -28,12 +28,9 @@ jobs:
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - name: Set version output
-        id: set_version
-        run: echo "::set-env name=VERSION::$(node -p 'require(\"./package.json\").version')"
 
   create-release:
-    needs: build-and-publish
+    needs: get-version
     runs-on: ubuntu-latest
     steps:
       - name: Create Release
