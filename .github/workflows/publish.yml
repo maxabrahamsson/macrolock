@@ -12,9 +12,13 @@ jobs:
       version: ${{ steps.package-version.outputs.version }}
     steps:
       - uses: actions/checkout@v2
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
       - name: Get package version
         id: package-version
-        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+        env:
+          VERSION: ${{ steps.package-version.outputs.version }}
 
   build-and-publish:
     needs: get-version
