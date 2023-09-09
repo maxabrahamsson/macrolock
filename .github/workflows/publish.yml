@@ -9,14 +9,14 @@ jobs:
   get-version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.package-version.outputs.version }}
+      version: ${{ steps.get-npm-version.outputs.version }}
     steps:
       - uses: actions/checkout@v2
       - name: get-npm-version
-        id: package-version
+        id: get-npm-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
-        env:
-          VERSION: ${{ steps.package-version.outputs.version }}
+      - name: Set package version as env variable
+        run: echo "VERSION=${{ steps.get-npm-version.outputs.version }}" >> $GITHUB_ENV
 
   build-and-publish:
     needs: get-version
