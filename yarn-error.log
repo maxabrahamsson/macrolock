@@ -1,0 +1,50 @@
+Arguments: 
+  /usr/local/Cellar/node/20.2.0/bin/node /usr/local/bin/yarn publish
+
+PATH: 
+  /Users/ahmetyildirim/.rvm/gems/ruby-2.6.3/bin:/Users/ahmetyildirim/.rvm/gems/ruby-2.6.3@global/bin:/Users/ahmetyildirim/.rvm/rubies/ruby-2.6.3/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:/Users/ahmetyildirim/.rvm/gems/ruby-2.6.3/bin:/Users/ahmetyildirim/.rvm/gems/ruby-2.6.3@global/bin:/Users/ahmetyildirim/.rvm/rubies/ruby-2.6.3/bin:/Users/ahmetyildirim/.cargo/bin:/Users/ahmetyildirim/.fig/bin:/Users/ahmetyildirim/.local/bin:/Users/ahmetyildirim/.rvm/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.2.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:137150:13)
+      at Interface.emit (node:events:511:28)
+      at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1124:18)
+      at ReadStream.onkeypress (node:internal/readline/interface:263:20)
+      at ReadStream.emit (node:events:511:28)
+      at emitKeys (node:internal/readline/utils:357:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+      at ReadStream.emit (node:events:511:28)
+      at addChunk (node:internal/streams/readable:332:12)
+
+npm manifest: 
+  {
+    "name": "macrolock",
+    "version": "1.3.0",
+    "description": "",
+    "main": "index.js",
+    "bin": {
+      "macrolock": "index.js"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
