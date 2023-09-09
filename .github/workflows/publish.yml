@@ -9,9 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      APP_NAME: ${{ github.event.repository.name }}
-
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
@@ -54,7 +51,6 @@ jobs:
           access: public
 
   release:
-    needs: publish
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
@@ -67,7 +63,6 @@ jobs:
       - name: Git
         run: |
           echo Branch name is: ${{ github.ref_name }}
-          echo Short sha: ${{ steps.git.outputs.short_sha}}
           echo Version is: ${{ steps.version.outputs.current-version}}
 
       - name: Create release
@@ -86,7 +81,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.APP_NAME }}-${{ steps.npm-version.outputs.current-version }}.${{ github.run_number }}
-          release_name: ${{ env.APP_NAME }} ${{ steps.npm-version.outputs.current-version }}
+          tag_name: ${{ github.event.repository.name }}-${{ steps.version.outputs.current-version}}.${{ github.run_number }}
+          release_name: ${{ github.event.repository.name }} ${{ steps.version.outputs.current-version}}
           draft: false
           prerelease: false
