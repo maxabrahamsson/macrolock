@@ -15,31 +15,32 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
   build-and-publish:
+    needs: get-version
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
-      - name: Install dependencies
-        run: npm ci
-      - name: Build and publish package
-        run: npm publish --access public
+          node-version: "14"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm install # use npm install instead of npm ci to generate package-lock.json if it doesn't exist.
+      - run: echo "No tests specified" # replace this with your test command if you have tests.
+      - run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Set version output
         id: set_version
         run: echo "::set-env name=VERSION::$(node -p 'require(\"./package.json\").version')"
+
   create-release:
     needs: build-and-publish
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Create release
+      - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ env.VERSION }}
           release_name: Release v${{ env.VERSION }}
