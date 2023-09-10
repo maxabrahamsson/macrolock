@@ -1,10 +1,10 @@
-# Macrolock
+# MacroLock
 
-Macrolock is a utility tool that helps you detect changes in a directory and execute a script if changes are detected. It does this by generating a checksum for the directory and comparing it with a previously stored checksum. If the checksums do not match, it means there have been changes in the directory, and Macrolock will execute the provided script.
+MacroLock is a utility tool that helps you detect changes in a directory and execute a script if changes are detected. It does this by generating a checksum for the directory and comparing it with a previously stored checksum. If the checksums do not match, it means there have been changes in the directory, and MacroLock will execute the provided script.
 
 ## Installation
 
-You can install Macrolock via npm:
+You can install MacroLock via npm:
 
 ```bash
 npm install macrolock
@@ -18,13 +18,13 @@ yarn add macrolock
 
 ## Usage
 
-Macrolock is used from the command line and takes three arguments:
+MacroLock is used from the command line and takes three arguments:
 
 1. The path to the directory you want to monitor.
 2. The path to the lock file where the checksum will be stored.
 3. The script you want to execute if changes are detected.
 
-Here's an example of how you can use Macrolock:
+Here's an example of how you can use MacroLock:
 
 ```json
 "scripts": {
@@ -37,7 +37,7 @@ Here's an example of how you can use Macrolock:
 }
 ```
 
-In this example, we're using [chokidar](https://www.npmjs.com/package/chokidar) to watch for changes in our directories. When chokidar detects a change, it runs our `ifDif` scripts which use Macrolock to check if there have been any substantial changes in our directories (i.e., changes that affect the checksum). If there have been, Macrolock executes the provided scripts (`js:build`and`generate-components`).
+In this example, we're using [chokidar](https://www.npmjs.com/package/chokidar) to watch for changes in our directories. When chokidar detects a change, it runs our `ifDif` scripts which use MacroLock to check if there have been any substantial changes in our directories (i.e., changes that affect the checksum). If there have been, MacroLock executes the provided scripts (`js:build`and`generate-components`).
 
 ## Contributing
 
