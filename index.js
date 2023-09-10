@@ -30,17 +30,13 @@ function hasChanged(directory, lockFilePath) {
   const newChecksum = getDirectoryChecksum(directory);
 
   if (!fs.existsSync(lockFilePath)) {
-    // If lock file doesn't exist, assume changes
-    fs.writeFileSync(lockFilePath, newChecksum);
-    return true;
+    return newChecksum;
   }
 
   const oldChecksum = fs.readFileSync(lockFilePath, "utf8");
 
   if (newChecksum !== oldChecksum) {
-    // Update lock file with new checksum
-    fs.writeFileSync(lockFilePath, newChecksum);
-    return true;
+    return newChecksum;
   } else {
     return false;
   }
@@ -50,8 +46,9 @@ function hasChanged(directory, lockFilePath) {
 const directory = process.argv[2];
 const lockFilePath = process.argv[3];
 const script = process.argv[4];
+const hasChanged = hasChanged(directory, lockFilePath);
 
-if (hasChanged(directory, lockFilePath)) {
+if (hasChanged) {
   console.log("Changes were detected.");
   // Run the provided script
   exec(script, (error, stdout, stderr) => {
@@ -59,8 +56,9 @@ if (hasChanged(directory, lockFilePath)) {
       console.error(`Error executing script: ${error}`);
       return;
     }
-
     console.log(stdout);
+    // Update lock file with new checksum
+    fs.writeFileSync(lockFilePath, hasChanged);
   });
 } else {
   console.log(
